@@ -1,6 +1,6 @@
 ### html/css
 
-### 元素的显示与隐藏
+#### 元素的显示与隐藏
 
 ##### display
 
@@ -26,7 +26,7 @@
 
 特点：隐藏之后，保留位置
 
-#### 
+
 
 ##### overflow
 
@@ -44,7 +44,7 @@
 
 
 
-### CSS用户界面样式
+#### CSS用户界面样式
 
 ##### 鼠标样式cursor
 
@@ -75,7 +75,7 @@
 
 给textarea添加属性`resize:none;`
 
-### vertial-align垂直对齐
+#### vertial-align垂直对齐
 
 文字水平对齐：text-align
 
@@ -100,7 +100,7 @@ vertial-align的一个特性：图片或者表单等行内元素，他的底线�
 1. 不使用`vertial-align:baseline`，使用middle、top等，让图片不要和文字基线对齐。
 2. 给img添加`display:block`转换为块级元素。
 
-### 溢出文字显示省略号
+#### 溢出文字显示省略号
 
 ##### white-space
 
@@ -111,7 +111,7 @@ vertial-align的一个特性：图片或者表单等行内元素，他的底线�
 - normal（自动换行）
 - nowrap（强制在同一行内显示所有文本，知道文本结束或遇到br标签对象才换行）
 
-### text-overflow 文字溢出
+#### text-overflow 文字溢出
 
 设置或检索是否使用一个省略标记……标示对象内文本的溢出
 
@@ -130,7 +130,7 @@ vertial-align的一个特性：图片或者表单等行内元素，他的底线�
 }
 ```
 
-### CSS精灵技术（sprite）
+#### CSS精灵技术（sprite）
 
 ##### 技术产生的背景
 
@@ -152,7 +152,7 @@ css精灵是一种处理网页**背景图像**的方式，它将一个页面设�
 
 小公司很少使用精灵图，维护成本高。
 
-### 滑动门
+#### 滑动门
 
 ##### 滑动门出现的背景
 
@@ -174,7 +174,7 @@ a 背景图像是左边切片
 
 span 背景图像是右边切片，位置是靠右对齐
 
-### web字体
+#### web字体
 
 ##### 字体格式
 
@@ -200,7 +200,7 @@ span 背景图像是右边切片，位置是靠右对齐
 
    基于SVG字体渲染的一种格式。
 
-### 字体图标
+#### 字体图标
 
 图片有诸多优点，但是缺点明显，比如图片不但增加了总文件的大小，还增加了很多额外的“http请求”，这都会大大降低网页的性能。更重要的是图片不能很好的进行“缩放”，因为图片放大和缩小会失真。字体图标（iconfont）能够满足这个需求。
 
@@ -249,7 +249,7 @@ fontawesome :<http://fontawesome.dashgame.com/>> 更新比较快
 
 ###### 字体引入到HTML
 
-第一步，在样式<style>中声明字体：告诉别人我们自己定义的字体
+第一步，在样式`<style>`中声明字体：告诉别人我们自己定义的字体
 
 ```css
 @font-face {
@@ -278,3 +278,111 @@ span {
 ##### 追加字体图标
 
 工作中，原来的字体图标不够用需要新增字体图标，原来的不能删除，此时我们需要将压缩包中的selection.json重新上传，然后选中自己想要的新增图标，重新下载压缩包替换原来的文件。
+
+#### 京东项目实战
+……
+
+##### 京东项目介绍
+……
+
+##### 项目背景
+
+电商平台花样最多
+
+##### 设计目标
+
+保证浏览器兼容IE7以上，火狐、360、谷歌等
+熟悉css+div布局，页面的搭建工作
+了解常用电商的布局模式
+为后期京东移动端做铺垫
+
+##### 几点思考
+
+###### 开发工具
+sublime
+
+###### CSS Reset类库
+
+为跨浏览器兼容做准备（css初始化，清除浏览器自带的样式）
+
+```
+<!-京东css reset->
+*{margin:0;padding:0}
+em,i{font-style:normal}
+li{list-style:none}
+img{border:0;vertical-align:middle}
+button{cursor:pointer}
+a{color:#666;text-decoration:none}
+a:hover{color:#e33333}
+button,input{font-family:Microsoft YaHei,Heiti SC,tahoma,arial,Hiragino Sans GB,\\5B8B\4F53,sans-serif}
+body{-webkit-font-smoothing:antialiased;background-color:#fff;font:12px/1.5 Microsoft YaHei,Heiti SC,tahoma,arial,Hiragino Sans GB,\\5B8B\4F53,sans-serif;color:#666}
+.hide,.none{display:none}.clearfix:after{visibility:hidden;clear:both;display:block;content:".";height:0}.clearfix{*zoom:1}
+    
+```
+
+说明：`font:12px/1.5 Microsoft YaHei` 字号12px，行高为字体大小的1.5倍）。
+
+`Normalize.css`只是一个很小的css文件，但它在磨人的HTML元素样式上提供了跨浏览器的高度一致性。相比于传统的CSS reset,Normalize.css是一种现代的、为HTML5准备的优质替代方案。
+
+获取normalize.css：
+https://github.com/necolas/normalize.css 下载normalize.css文件
+
+创造normalize.css有下面这几个目的：
+
+保护有用的浏览器样式而不是去掉他们。
+
+一般化的样式：为大部分HTML元素提供。
+
+修复浏览器自身的bug并保证各浏览器的一致性。
+
+优化css可用性：用一些小技巧。
+
+解释代码：用注释和详细的文档来。
+
+###### 技术栈
+html+css布局
+
+###### 低版本浏览器 ie6
+单独做一个跳转页面
+
+##### 目录说明
+要实现结构和样式分离的设计思想，根目录下有这四个文件夹（目录）。
+
+|名称|说明|
+|:---|:---|
+|css|存放css文件|
+|images|存放图片|
+|index|京东首页html|
+|fonts|存放字体图标|
+|js|后期存放js文件 |
+
+
+
+##### 运用知识点
+###### 引入ico图标
+
+获取地址：https://www.jd.com/favicon.ico
+几乎所有网站都是这样，在域名后加`/favicon.ico `
+
+代码：
+`<link rel="icon" href="favicon.ico" type="image/x-icon" />`
+
+
+注意：
+
+1.它不是iconfont，也是图片
+
+2.位置是放在`<head>`标签中
+
+3.后面的`type="image/x-icon"`可以省略
+
+4.为了兼容性，请将favicon.ico这个图标放在根目录下
+
+
+
+
+
+
+
+
+
