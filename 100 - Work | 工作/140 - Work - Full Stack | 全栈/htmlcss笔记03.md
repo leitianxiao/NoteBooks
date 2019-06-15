@@ -317,7 +317,7 @@ a:hover{color:#e33333}
 button,input{font-family:Microsoft YaHei,Heiti SC,tahoma,arial,Hiragino Sans GB,\\5B8B\4F53,sans-serif}
 body{-webkit-font-smoothing:antialiased;background-color:#fff;font:12px/1.5 Microsoft YaHei,Heiti SC,tahoma,arial,Hiragino Sans GB,\\5B8B\4F53,sans-serif;color:#666}
 .hide,.none{display:none}.clearfix:after{visibility:hidden;clear:both;display:block;content:".";height:0}.clearfix{*zoom:1}
-    
+
 ```
 
 说明：`font:12px/1.5 Microsoft YaHei` 字号12px，行高为字体大小的1.5倍）。
@@ -455,8 +455,238 @@ SEO（Search Engine Optimization），搜索引擎优化。是指通过对网站
 
 
 
+##### CSS W3C 统一验证工具
+
+cssstats 在线的css代码分析工具   
+
+https://cssstats.com/
+
+W3C 统一验证工具 支持本地文件
+
+http://validator.w3.org/unicorn/
+
+```
+.clearfix {
+  *zoom:1;
+}
+```
+
+会认证不通过，因为高版本的浏览器不使用这种写法的。属于`css hack`,是用来解决低版本的浏览器问题。
+
+##### 代码压缩
+
+开发时，竖着书写，方便阅读。上线时，进行代码压缩，减少代码页面的时间。
+
+推荐网站 ：http://www.chinaz.com/
+
+很多功能跟前端有关系，比如SEO排名、搜索权重、CSS格式化（代码压缩）等……
+
+注意：
+
+压缩之后要保证代码能用
+
+压缩之后起名叫 `xxx.min.css`
+
+本地要保留原始文件，线上上传压缩文件。
+
+#### html5 新标签与特性
+
+IE9以上的版本才支持。除非针对这些属性再去找一些hack。
+
+##### 文档类型设定
+
+document:
+
+HTML 输入html:4s
+
+```
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+```
+XHTML 输入html:xl
+
+HTML5 输入html5
+
+`<!DOCTYPE html>`
+
+##### 字符设定
+
+HTML和XHTML中：
+
+`<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />`
+
+HTML5中：
+
+`<meta charset="UTF-8">`
+
+##### 常用新标签
+
+w3c手册中文官网：http://www.w3school.com.cn/
+html5 新内容：
+
+http://www.w3school.com.cn/html5/html_5_intro.asp
+
+- header 定义文档的页眉 头部
+
+- nav 定义导航链接部分
+
+- footer  定义文档或节的页脚 尾部
+
+- article 定义文章
+
+- section 定义文档中的节（section、区段）
+
+- aside 定义其所处内容之外的内容 侧边
+
+- datalist 标签定义选项列表 与input元素配合使用
+```
+<!-- input的list与datalist的id关联 -->
+<input type="text" name="" id="" placeholder="请输入明星：" list="star">
+<datalist id="star">
+    <option value="刘德华">
+    <option value="刘若英">
+    <option value="戚薇">
+</datalist>
+```
+option 元素永远都要设置 value 属性。
+
+- fieldset 元素可将表单内的相关元素分组，打包 与legend搭配使用
+```
+<fieldset>
+    <legend>用户信息</legend>
+    用户名：<input type="text"><br>
+    密码：<input type="password">
+</fieldset>
+```
+
+#### 新增input type属性
+
+- placeholder 占位符，当用户输入时，里面的文字消失，删除时，再出现。
+```
+<input type="text" name="" id="" placeholder="请输入数字：">
+```
+
+- autofocus 自动获得焦点，当页面加载时 input元素自动获得焦点
+```
+用户名：<input type="text" autofocus="autofocus">
+```
+
+- mulitple 多文件上传，`file`只能单选
+```
+<!-- 单文件上传 -->
+<input type="file" name="" id="">
+<!-- 多文件上传 按ctrl键多选 -->
+<input type="file" name="" id="" multiple>
+或
+<input type="file" name="" id="" multiple="multiple">
+```
+
+- autocomplete 规定 `form` 或 `input` 域应该拥有自动完成功能
+
+- required 必填项，内容不能为空
+```
+<input type="text" required="required">
+或
+<input type="text" required>
+```
+- accesskey 规定激活（使元素获得焦点）的快捷键
+```
+<input type="text" accesskey="s">
+```
+不同浏览器使用`s`或`alt+s`或`alt+shift+s`能让那个焦点落在该元素上。mac电脑使用`ctrl+alt+s`
+
+##### 多媒体标签
+
+- embed 标签定义嵌入的内容
+
+- audio 播放音频
+
+- video 播放视频
+
+###### embed
+embed可以用来插入各种多媒体，格式可以是 Midi、Wav、AIFF、AU、MP3等,url为音频或视频文件及其路径，可以是相对路径或绝对路径。
+```
+<embed height=498 width=510 src='http://player.youku.com/embed/XNDE0MTMwNTcxMg==' frameborder=0 'allowfullscreen'>
+```
+###### audio
+HTML5通过`<audio>`标签来解决音频的播放问题。
+```
+<!-- 通过src指定音频文件的路径即可 -->
+<audio src=“path.mp3”>
+
+```
+
+并可通过附加的属性来控制音频的播放：
+
+`autoplay` 音频在就绪后马上播放。**(浏览器禁止autoplay？？？)**
+
+`controls` 向用户显示音频控件（比如播放/暂停按钮）
+
+`loop` 循环播放
+
+`muted` 静音
+
+当前，audio元素支持三种音频格式MP3、Wav、Ogg
+
+推荐工具：格式工厂 ，可以转换为各种格式。
+
+各浏览器对格式的支持情况：
+
+|浏览器	|MP3	|Wav	|Ogg|
+|----|----|----|----|
+|InternetExplorer	|YES|	NO|	NO|
+|Chrome	|YES|	YES|	YES|
+|Firefox	|YES|	YES	|YES|
+|Safari	|YES|	YES|	NO|
+|Opera|YES|YES	|YES|
+
+多浏览器支持的方案：
+```
+<audio  autoplay controls >
+    <source src="deng.mp3" />
+    <source src="deng.ogg" />
+    <source src="deng.wav" />
+    您的浏览器版本太低。
+</audio>
+```
+
+###### video
+HTML5使用`<video>`来解决音频问题。
+
+用来控制视频的播放的属性
+
+`autoplay` 自动播放
+
+`controls` 向用户显示视频控件（比如播放/暂停按钮）
+
+`loop` 循环播放
+
+`muted` 静音
+
+`width` 设置播放窗口的宽度
+
+`height` 设置播放窗口的高度
+
+video元素支持三种视频格式，Ogg、MPEG4、WebM
+
+多浏览器支持的方案：
+```
+<video  autoplay controls >
+    <source src="movie.mp4" />
+    <source src="deng.ogg" />
+    <source src="deng.wav" />
+    您的浏览器版本太低。
+</audio>
+```
 
 
 
 
 
+#### CSS3 新增选择器
+##### 结构（位置）伪类选择器
+##### 属性选择器
+##### 伪元素选择器
+##### CSS3盒模型
+##### 学成在线综合案例
+##### 过渡（CSS3）
