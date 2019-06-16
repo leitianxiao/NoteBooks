@@ -679,14 +679,184 @@ video元素支持三种视频格式，Ogg、MPEG4、WebM
 </audio>
 ```
 
-
-
-
-
 #### CSS3 新增选择器
+
 ##### 结构（位置）伪类选择器
+- :first-child 选取属于其父元素的首个子元素的指定选择器
+```
+<!-- 第一个li的color为红色 -->
+ul :first-child {
+    color: red;
+}
+或
+ul li:first-child {
+    color: red;
+}
+```
+
+- :last-child 选取属于其父元素的最后一个子元素的指定选择器
+
+- :nth-child(n) 匹配属于其父元素的第N个子元素，无论元素类型
+```
+<!-- 第3个元素 -->
+ul :nth-child(3) {
+    background-color: pink;
+}
+<!-- 偶数个元素 -->
+ul :nth-child(even) {
+    background-color: pink;
+}
+<!-- 奇数个元素 -->
+ul :nth-child(odd) {
+    background-color: black;
+}
+<!-- 所有元素，n从0开始 -->
+ul :nth-child(n) {
+    background-color: black;
+}
+<!-- 偶数个元素 -->
+ul :nth-child(2n) {
+    background-color: black;
+}
+<!-- 奇数个元素 -->
+ul :nth-child(2n+1) {
+    background-color: black;
+}
+```
+- :nth-last-child(n) 匹配属于其父元素的第N个子元素，无论元素类型，从最后
+
 ##### 属性选择器
+根据元素的属性及属性值来选择元素
+```
+标签[属性] {
+  ……
+}
+<!-- 选择有class属性的div -->
+div[class] {
+    background-color: pink;
+}
+<!-- 选择有id值为name的div -->
+div[id=demo] {
+    background-color: pink;
+}
+<!-- 选择class值以demo开头的div -->
+div[class^=demo] {
+    background-color: pink;
+}
+<!-- 选择class值以demo结尾的div -->
+div[class$=demo] {
+   background-color: yellow;
+}
+<!-- 选择class值包含demo的div -->
+div[class*=demo] {
+   background-color: yellow;
+}
+```
+
 ##### 伪元素选择器
+1.E::first-letter 文本的第一个单词或字
+2.E::first-line 文本第一行
+3.E::selection 可改变选中文本的样式
+4.before:: 在被选元素的内容前面插入内容，使用 content 属性来指定要插入的内容。
+
+```
+<!-- 插入的内容是在p标签的内部内容的前面 ，其实是个行内盒子  -->
+p::before {
+   content: "hello world";
+}
+```
+5.after::  在被选元素的内容后面插入内容，使用 content 属性来指定要插入的内容。
+
 ##### CSS3盒模型
+CSS3中可以通过box-sizing来指定盒模型，即可指定为content-box、border-box，这样我们计算盒子就可以分为两种情况：
+//外加模式,CSS2中的盒子模型
+1.box-sizing:content-box 盒子大小为width+padding+border content-box:此值为默认值
+//内减模式
+2.box-sizing:border-box 盒子大小为width 就是说padding和border是包含在width里的
+注：上面标注的width指的是CSS属性里设置的width:length，content的值是会自动调整的。
+
+###### 小米案例
+鼠标经过时，原图内部增加一个透明边框效果
+```
+<style>
+     * {
+         margin:0;
+         padding: 0;
+     }
+     div {
+         width: 150px;
+         height: 100px;
+
+     }
+     img {
+         width: 100%;
+         height: 100%;
+     }
+     <!-- 鼠标经过插入伪元素 -->
+     div:hover::after {
+         content: "";
+         width: 150px;
+         height: 100px;
+         position: absolute;
+         top: 0;
+         left: 0;
+         border:5px solid rgba(255, 255, 255, 0.5);
+         <-- box-sizing 避免盒子被挤开 -->
+         box-sizing: border-box;
+     }
+ </style>
+ -----
+ <body>
+    <div>
+        <img src="mycat.jpeg" alt="">
+    </div>
+</body>
+```
+
 ##### 学成在线综合案例
+###### 图片转换为ico图标
+1.先切图 透明图片仅有gif和png格式支持
+2.把图片转换为图标，在线转换网站 http://www.bitbug.net/
+
+###### logo的写法
+1.结构：div>a>h1、img
+2.隐藏h1   `position: absolute;` `overflow: hidden;` `text-indent: -9999px;`
+
+```
+<!-- logo start -->
+    <div class="logo">
+        <a href="#" tiltle="学成在线">
+            <h1>学成在线</h1>
+            <img src="images/xclogo.png" alt="">
+        </a>
+    </div>
+<!-- logo end -->
+-----
+<style>
+    .logo {
+        width: 170px;
+        height: 35px;
+        position: absolute;
+        top: 50%;
+        left: -170px;
+        margin-top: -17px;
+      }
+    .logo img {
+        width: 100%;
+        height: 100%;
+    }
+    .logo a {
+        display: block;
+        width: 170px;
+        height: 35px;
+    }  
+    .logo h1 {
+        position: absolute;
+        overflow: hidden;
+        text-indent: -9999px;
+    }
+</style>
+
+```
 ##### 过渡（CSS3）
+##### 2D变形（CSS3） transform
