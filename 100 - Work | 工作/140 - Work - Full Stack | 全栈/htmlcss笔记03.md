@@ -865,6 +865,8 @@ CSS3中可以通过box-sizing来指定盒模型，即可指定为content-box、b
 
 帧动画：通过一帧一帧的画面按照固定顺序和速度播放。
 
+`transition:要过渡的属性 过渡效果花费的时间 过渡效果的时间曲线 过渡效果开始的时间`
+
 |属性	|描述|
 |----|----|
 |transition|	简写属性，用于在一个属性中设置四个过渡属性。|
@@ -873,4 +875,83 @@ CSS3中可以通过box-sizing来指定盒模型，即可指定为content-box、b
 |transition-timing-function	|规定过渡效果的时间曲线。默认是 "ease"。	|
 |transition-delay|	规定过渡效果何时开始。默认是 0。|
 
+添加多个样式的变换效果，添加的属性由逗号分隔。
+
+所有属性可以用all。
+
+过渡最好写在本体上。
+
+运动曲线：
+linear  线性过渡
+
+ease 平滑过渡
+
+ease-in 由慢到快
+
+ease-out 由快到慢
+
 ##### 2D变形（CSS3） transform
+transform是CSS3具有颠覆性的特征之一，可以实现元素位移、旋转、倾斜、缩放，甚至支持矩阵。可以取代大量之前只能靠flash才可以实现的效果
+
+###### 移动translate(x,y)
+
+translate(x,y) 水平方向和垂直方向同时移动
+
+translateX(X) 仅水平方向移动
+
+translateY(Y) 仅垂直方向移动
+
+```
+<!-- 实现定位的盒子水平、垂直居中 -->
+<!-- translate 如果x是50%，是跟父亲没有关系的，是走自己的50% -->
+div {
+    width: 100px;
+    height: 100px;
+    background-color: pink;
+    position: absolute;
+    top: 50%;
+    left:50%;
+    transform: translate(-50%,-50%);  
+}
+
+```
+
+###### 缩放scale(x,y)
+
+scale(x,y) 使元素水平方向和垂直方向同时缩放
+
+scaleX(X) 元素仅水平方向缩放
+
+scaleY(Y) 元素仅垂直方向缩放
+
+`transform: scale(0.8,1);` 宽度变为原来的80%，高度不变。
+
+`transform: scale(0.8);` 高度省略，默认和宽度一起缩放80%。
+
+###### 旋转rotate(deg)
+
+可以对元素进行旋转，正值为顺时针，负值为逆时针。
+`transform:rotate(45deg);`
+
+
+###### transform-origin可以调整元素转换变形的原点
+```
+<!-- 以右上角为原点，顺时针旋转30度 -->
+div {
+    transform-origin: right top;
+    transform: rotate(30deg);
+}
+<!-- 以水平方向10px 垂直方向10px为原点，顺时针旋转30度 -->
+div {
+    transform-origin: 10px 10px;
+    transform: rotate(30deg);
+}
+```
+###### 倾斜 skew(deg,deg)
+可以使元素按一定的角度进行倾斜，可以为负值，第二个参数不写默认为0；
+
+`transform: skew(30deg,0deg);` 把元素水平方向向上倾斜30度，处置方向保持不变
+
+主要做阴影效果。
+
+##### 3D变形（CSS3） transform
