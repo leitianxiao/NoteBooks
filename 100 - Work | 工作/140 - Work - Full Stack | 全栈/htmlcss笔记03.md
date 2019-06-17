@@ -859,4 +859,18 @@ CSS3中可以通过box-sizing来指定盒模型，即可指定为content-box、b
 
 ```
 ##### 过渡（CSS3）
+过渡（transition）是css中具有颠覆性的特性之一。无需使用Flash动画或JavaScript，可以添加添加某种效果可以从一种样式转变到另一个。
+
+过渡动画：是从一种状态渐渐过渡到另外一种状态。
+
+帧动画：通过一帧一帧的画面按照固定顺序和速度播放。
+
+|属性	|描述|
+|----|----|
+|transition|	简写属性，用于在一个属性中设置四个过渡属性。|
+|transition-property|	规定应用过渡的 CSS 属性的名称。|
+|transition-duration	|定义过渡效果花费的时间。默认是 0。|
+|transition-timing-function	|规定过渡效果的时间曲线。默认是 "ease"。	|
+|transition-delay|	规定过渡效果何时开始。默认是 0。|
+
 ##### 2D变形（CSS3） transform
