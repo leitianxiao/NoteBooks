@@ -954,4 +954,89 @@ div {
 
 主要做阴影效果。
 
+##### 动画animation
+是CSS3具有颠覆性的特征之一。可以通过设置多个节点来精确控制一个或一组动画。可以在网页中取代动画图片、flash动画和javascript。
+`animation:动画名称 花费时间 运动曲线 开始时间 播放次数 是否反方向`
+
+animation是简写，用于设置六个动画属性：
+
+|名称||
+|----|---|
+|animation-name	|规定需要绑定到选择器的 keyframe 名称|
+|animation-duration|	规定完成动画所花费的时间，以秒或毫秒计。默认是0|
+|animation-timing-function|	规定动画的速度曲线。默认ease|
+|animation-delay|	规定在动画开始之前的延迟。默认是0|
+|animation-iteration-count|	规定动画应该播放的次数。默认是1，n表示次数，infinite表示动画应该无限次播放|
+|animation-direction|	规定是否应该轮流反向播放动画。默认是normal,alternate是轮流反向播放|
+|animation-paly-state|规定动画是否正在运行或暂停，默认是running，paused暂停|
+|animation-fill-mode|规定对象动画时间之外的状态|
+
+声明动画 `@keyframes` 关键帧,声明动画可以多方调用。
+
+```
+<style>
+    div {
+        width: 100px;
+        height: 100px;
+        background-color: pink;
+        position: absolute;
+        left: 0;
+        /* 调用动画move */
+        /* animation: name duration timing-function delay iteration-count direction fill-mode; */
+        animation: move 3s ease 1s infinite;
+    }
+    /* 使用@keyframes声明动画,动画名称叫move */
+    @keyframes move {
+        from {  
+            left: 0;
+            background-color: red;
+        }
+        to {
+            left: 100px;
+            background-color: skyblue;
+        }
+    }
+</style>
+```
+
+多个动作时可以使用
+```
+@keyframes move {
+    0% {  
+
+    }
+    50% {
+
+    }
+    100% {
+
+    }
+}
+```
+
+##### 伸缩布局(flex)
+Flex是Flexible Box的缩写，意为”弹性布局”。
+
+###### 属性讲解
+
+1.flex子项目在主轴上的缩放比例，不指定flex属性的不参与伸缩分配。
+- display:flex；
+- flex:1;
+- min-width 最小宽度，即使弹性布局也不能无限压缩，通过该字段来规定盒子压缩的最小宽度,压缩到最小宽度时无法再压缩。
+- max-width 最大宽度
+- min-height
+- max-height
+
+2.flex-direction 调整主轴方向（默认为水平方向）
+flex-direction:column; 垂直排列
+flex-direction:row; 水平排列
+
+##### 携程案例
+https://m.ctrip.com/html5/
+
+
+
+
+
+
 ##### 3D变形（CSS3） transform
