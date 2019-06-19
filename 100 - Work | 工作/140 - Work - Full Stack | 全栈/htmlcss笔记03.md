@@ -954,6 +954,17 @@ div {
 
 主要做阴影效果。
 
+##### 浏览器前缀
+后面我们常用解决H5和C3的兼容解决文件，我们这里暂不涉及。
+
+|浏览器前缀|浏览器|
+|----|---|
+|-webkit-|google chrome,safari,Android browser|
+|-moz-|firefox|
+|-o-|opera|
+|-ms-|IE,Edge|
+|-kthml-|Kongqueror|
+
 ##### 动画animation
 是CSS3具有颠覆性的特征之一。可以通过设置多个节点来精确控制一个或一组动画。可以在网页中取代动画图片、flash动画和javascript。
 `animation:动画名称 花费时间 运动曲线 开始时间 播放次数 是否反方向`
@@ -1034,8 +1045,154 @@ flex-direction:row; 水平排列
 ##### 携程案例
 https://m.ctrip.com/html5/
 
+```
+<style>
+       * {
+           margin: 0;
+           padding: 0;
+           box-sizing: border-box;
+       }
+       body {
+           min-width: 320px;
+           max-width: 500px;
+           margin: 0 auto;
+           background-color: #fff;
+       }
+       a {
+           text-decoration: none;
+           color: #fff;
+       }
+       header {
+           height: 150px;
+       }
+       header img {
+           height: 150px;
+           width: 100%;
+       }
+       nav {
+           border: 1px solid #cccccc;
+           padding: 4px;
+       }
+       .row {
+           height: 90px;
+           display: flex;
+           background-color: #ff6a7f;
+           border-radius: 5px;
+       }
+       .row div {
+           height: 100%;
+           flex: 1;
+           border-right:1px solid #fff;
+       }
+       .row div:nth-child(3) {
+           border-right:none;
+       }
+       .row a {
+           display: block;
+           height: 100%;
+           width: 100%;
+           text-align: center;
+           line-height: 45px;   
+       }
+       .row-33 {
+           display: flex;
+           flex-direction:column;
+       }
+       .row-33 a {
+           flex:1;
+           border-bottom: 1px solid #fff;
+       }
+       .row-33 a:nth-child(2) {
+           border-bottom: none;
+       }
+   </style>
+</head>
+<body>
+   <header>
+       <img src="mtrip-banner.jpg" alt="">
+   </header>
+   <nav>
+       <div class="row">
+           <div>
+               <a href="#">酒店</a>
+               <i></i>
+           </div>
+           <div class="row-33">
+               <a href="#">民俗</a>
+               <a href="#">客栈</a>
+           </div>
+           <div class="row-33">
+               <a href="#">公寓</a>
+               <a href="#">宾馆</a>
+           </div>
+       </div>
+   </nav>
+</body>
+```
+##### 文字阴影
+给文字添加阴影效果，区别与box-shadow。
+
+`text-shadow:水平位置 垂直位置 模糊距离 阴影颜色。`
+|值|描述|
+|---|---|
+|h-shadow|必需，允许负值|
+|v-shadow|必需，允许负值|
+|blur|可选，模糊距离|
+|color|可选，阴影颜色|
+
+##### 背景渐变
+仅讲线性渐变，颜色沿着一条直线过渡，从左到右、从右到左、从顶部到底部、从底部到顶部……
+
+向下/向上/向左/向右/对角方向
+
+兼容性问题很严重
+
+1.linear-gradient 线性渐变
+
+`background: linear-gradient(direction, color-stop1, color-stop2, ...);`
+
+线性渐变至少两个颜色节点。
+
+`background: linear-gradient(渐变起始位置, 颜色 位置, 颜色 位置，……);`
+
+background: linear-gradient(top, red 0%, green 30%,blue 70%);
+
+2.浏览器支持
+
+需添加浏览器前缀,否则可能不显示。
+
+```
+#grad {
+  background: -webkit-linear-gradient(red, blue); /* Safari 5.1 - 6.0 */
+  background: -o-linear-gradient(red, blue); /* Opera 11.1 - 12.0 */
+  background: -moz-linear-gradient(red, blue); /* Firefox 3.6 - 15 */
+  background: linear-gradient(red, blue); /* 标准的语法 */
+}
+```
+##### 背景缩放
+
+通过background-size设置背景图片的尺寸，就像我们设置img尺寸一样。
+应用：移动端，因为ios会放大像素，所以背景图同常按照尺寸的2倍来做，再进行缩放，才能保证高清。
+
+其参数可以设置如下：
+
+1.可以设置为长度单位px或百分比
+
+2.设置为cover时会自动调整缩放比例，保证图片始终充满背景区域，如果溢出则隐藏
+
+3.设置为contain会自动调整缩放比例，保证图片始终完整显示在背景区域
+
+`background-size:length|percentage|cover|contain`
+
+|属性值 |描述|
+|---|---|
+|length|设置背景图像的高度和宽度，如果只设定一个值，第二个值会被设置为auto|
+|percentage|以父元素的百分比来设置背景图像的宽度和高度|
+|cover|把背景图像扩展到足够大，以使背景图像完全覆盖背景区域|
+|contain|把图像扩展到最大尺寸，以使其宽度和高度完全适应内容区域|
 
 
+##### 多背景
 
 
 
