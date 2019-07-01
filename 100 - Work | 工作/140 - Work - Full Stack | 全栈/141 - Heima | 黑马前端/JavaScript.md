@@ -1316,9 +1316,8 @@ function f1() {
 
 ### 隐式全局变量
 
-> 隐式全局变量：声明的变量没有var，作用与全局的
+> 隐式全局变量：声明的变量时没有var，作用与全局的变量。
 >
-> 
 
 ```javascript
 function sum() {
@@ -1372,36 +1371,13 @@ console.log( num ); // undefiend
 	只有函数可以制造作用域结构， 那么只要是代码，就至少有一个作用域, 即全局作用域。凡是代码中有函数，那么这个函数就构成另一个作用域。如果函数中还有函数，那么在这个作用域中就又可以诞生一个作用域。
 	
 	将这样的所有的作用域列出来，可以有一个结构: 函数内指向函数外的链式结构。就称作作用域链。
-```javascript
-// 案例1：
-function f1() {
-    function f2() {
-    }
-}
+示例：
 
-var num = 456;
-function f3() {
-    function f4() {    
-    }
-}
-```
+sum现在3级作用域找，如果没有，再向上级作用域找。
 
-![06-1](media/06-1.png)
+![](/Users/leitianxiao/Documents/GitHub/NoteBooks/100 - Work | 工作/110 - Work -Src | 源 /zuoYongYulLian.png)
 
-```javascript
-// 案例2
-function f1() {
-    var num = 123;
-    function f2() {
-        console.log( num );
-    }
-    f2();
-}
-var num = 456;
-f1();
-```
 
-![06-2](media/06-2.png)
 
 ## 预解析
 
@@ -1412,6 +1388,7 @@ f1();
 1. 把变量的声明提升到当前作用域的最前面，只会提升声明，不会提升赋值。
 2. 把函数的声明提升到当前作用域的最前面，只会提升声明，不会提升调用。
 3. 先提升var，在提升function
+4. 预解析会分段（多个script标签中的函数重名，预解析时不冲突）
 
 
 
@@ -1466,16 +1443,34 @@ function f1() {
 }
 // 3、-----------------------------------
 f1();
-console.log(c);
-console.log(b);
-console.log(a);
+console.log(c);//9 隐式全局变量
+console.log(b);//9 隐式全局变量
+console.log(a);//报错
 function f1() {
   var a = b = c = 9;
-  console.log(a);
-  console.log(b);
-  console.log(c);
+  //var a;
+  //a=9; 局部变量
+  //b=9; 隐式全局变量
+  //c=9; 隐式全局变量
+  console.log(a);//9
+  console.log(b);//9
+  console.log(c);//9
 }
 ```
+
+## 编程思想概述
+
+面向过程：凡事都要亲力亲为，每件事的具体过程都要知道，注重过程。
+
+面向对象：只需要根据需求找对象，所有的事情对象来做，注重结果。
+
+面向对象特性：封装、继承、多态（抽象性）。
+
+js不是面向对象的语言，但是可以模拟面向对象的思想。
+
+js是一门基于对象的语言，本身系统有很多对象可以拿来用，不用创建对象，但是可以模拟面向对象。
+
+
 
 ## 对象
 
