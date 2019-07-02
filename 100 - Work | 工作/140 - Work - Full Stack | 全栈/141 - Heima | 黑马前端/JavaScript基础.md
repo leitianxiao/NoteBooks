@@ -1530,10 +1530,37 @@ var o = {
 ```
 ### 对象创建方式
 
-- 对象字面量
+- 调用系统构造函数new Object()创建对象（又叫实例化一个对象）
 
 ```javascript
+//实例化对象
+var obj = new Object();
+/*
+对象有特征和行为
+特征----> 属性
+行为----> 方法/函数
+*/
+//添加属性
+obj.name="xiao";
+obj.age=23;
+obj.sex="female";
+//添加方法
+obj.sayHi=function () {
+  console.log("hello world");
+};
+obj.play=function () {
+  console.log("我喜欢玩手机");
+};
+//获取属性、调用方法
+console.log(obj.name);
+obj.sayHi();
+```
+
+- 对象字面量创建对象
+```javascript
+//var obj={}; 看到花括号就要想到是对象
 var o = {
+  //属性和方法使用键值对方式表示
   name: 'zs',
   age: 18,
   sex: true,
@@ -1543,19 +1570,9 @@ var o = {
 };   
 ```
 
-- new Object()创建对象
-
-```javascript
-var person = new Object();
-  person.name = 'lisi';
-  person.age = 35;
-  person.job = 'actor';
-  person.sayHi = function(){
-  console.log('Hello,everyBody');
-}
-```
 - 工厂函数创建对象
 ```javascript
+//把创建对象的过程，放在函数中，返回这个对象
 function createPerson(name, age, job) {
   var person = new Object();
   person.name = name;
@@ -1566,9 +1583,13 @@ function createPerson(name, age, job) {
   }
   return person;
 }
+//调用方法创建对象
 var p1 = createPerson('张三', 22, 'actor');
+var p2 = createPerson('王五', 23, 'actor');
 ```
-- 自定义构造函数
+
+- 自定义构造函数创建对象
+
 ```javascript
 function Person(name,age,job){
   this.name = name;
@@ -1577,10 +1598,57 @@ function Person(name,age,job){
   this.sayHi = function(){
   	console.log('Hello,everyBody');
   }
+  //注意这里没有return
 }
+//注意这里有个new
 var p1 = new Person('张三', 22, 'actor');
 ```
+
+- 创建对象时内存空间示意图：
+
+![](/Users/leitianxiao/Documents/GitHub/NoteBooks/100 - Work | 工作/110 - Work -Src | 源 /new.png)
+
+- 如何获取变量（对象）是不是属于什么类型？
+
+  语法：变量 instance of 类型名字; 结果是布尔类型，true/false 
+
+- 字面量创建对象的缺陷
+
+  一次性的对象，相当于写死了，不能传值进去。
+
+- 点语法
+
+  对象.名字=值；//添加属性
+
+  对象.名字=方法; //添加方法
+
+- js是一门动态语言，何解？
+
+  1.代码（变量）只有执行到这个位置的时候，才知道这个变量中到底存储的是什么，如果是对象就有对象的属性和方法，如果是变量，就是变量的作用。
+
+  2.对象没有什么，只要点了，就可以为对象添加属性或方法。
+
+- 访问属性的另一种写法
+
+```javascript
+function Pic(picWidth,picHeight,picSize) {
+    this.picWidth=picWidth;
+    this.picHeight=picHeight;
+    this.picSize=picSize;
+    this.show=function () {
+      console.log("内容");
+    };
+}
+var obj=new Pic(100,200,300);
+console.log(obj.picWidth);//100
+//访问属性的另一种写法---> 对象["属性"]
+//调用方法的另一种写法---> 对象["方法"]();
+obj["picWidth"]=30;
+console.log(obj["picWidth"]);//30
+```
+
 ### 属性和方法
+
 	如果一个变量属于一个对象所有，那么该变量就可以称之为该对象的一个属性，属性一般是名词，用来描述事物的特征
 	如果一个函数属于一个对象所有，那么该函数就可以称之为该对象的一个方法，方法是动词，描述事物的行为和功能
 ### new关键字
@@ -1604,6 +1672,35 @@ new会返回这个新对象
 		2. 一般函数直接执行，内部this指向全局window
 		3. 函数作为一个对象的方法，被该对象所调用，那么this指向的是该对象
 		4. 构造函数中的this其实是一个隐式对象，类似一个初始化的模型，所有方法和属性都挂载到了这个隐式对象身上，后续通过new关键字来调用，从而实现实例化
+### JSON数据的遍历
+
+> JSON数据：成对出现，键值对形式
+>
+> JSON也是一个对象，数据都是成对的，一般JSON格式的数据无论是键还是值都要用引号引起来
+
+```javascript
+//对象是无序的，没有索引，不能通过for循环遍历
+var json={
+  "name":"乔峰",
+  "age":"23",
+  "sex":"男"
+}
+console.log(json.school);//undefinded
+/*
+因为js是一门动态语言，对象没有什么点就有了，但是只有声明，没有赋值，(此时对象有这个属性，但是没赋值)，所以是undefinded
+*/
+
+//key是一个变量，存的是该对象的属性名字
+for (var key in json){
+  console.log(key);//json对象中属性的名字
+  console.log(json[key]);//json对象中属性的值
+  console.log(json.key);//undefined
+  //访问属性时，对象中确实有这个属性，可以用 对象.名字 或者 对象["属性名"]，如果没有这个属性，不能这么写。
+  
+}
+
+```
+
 ## 对象的使用
 
 ### 遍历对象的属性
