@@ -1672,6 +1672,8 @@ new会返回这个新对象
 		2. 一般函数直接执行，内部this指向全局window
 		3. 函数作为一个对象的方法，被该对象所调用，那么this指向的是该对象
 		4. 构造函数中的this其实是一个隐式对象，类似一个初始化的模型，所有方法和属性都挂载到了这个隐式对象身上，后续通过new关键字来调用，从而实现实例化
+## 对象的使用
+
 ### JSON数据的遍历
 
 > JSON数据：成对出现，键值对形式
@@ -1701,9 +1703,8 @@ for (var key in json){
 
 ```
 
-## 对象的使用
-
 ### 遍历对象的属性
+
 > 通过for..in语法可以遍历一个对象
 
 ```javascript
@@ -1729,9 +1730,11 @@ console.log(obj.name); // undefined
 ### 简单类型和复杂类型的区别
 >基本类型又叫做值类型，复杂类型又叫做引用类型
 >
->值类型：简单数据类型，基本数据类型，在存储时，变量中存储的是值本身，因此叫做值类型。
+>值类型：简单数据类型，基本数据类型，number、string、boolean在存储时，变量中存储的是值本身，因此叫做值类型。
 >
->引用类型：复杂数据类型，在存储是，变量中存储的仅仅是地址（引用），因此叫做引用数据类型。
+>引用类型：复杂数据类型，object，在存储是，变量中存储的仅仅是地址（引用），因此叫做引用数据类型。
+>
+>空类型：undefined 、null
 
 - 堆和栈
 
@@ -1739,6 +1742,12 @@ console.log(obj.name); // undefined
   堆栈空间分配区别：
   　　1、栈（操作系统）：由操作系统自动分配释放 ，存放函数的参数值，局部变量的值等。其操作方式类似于数据结构中的栈；
   　　2、堆（操作系统）： 存储复杂类型(对象)，一般由程序员分配释放， 若程序员不释放，由垃圾回收机制回收，分配方式倒是类似于链表。
+  　　
+  值类型的值在哪一块空间存储？值在栈上
+  
+  引用类型的值在哪一块空间存储？对象在堆上，地址在栈上
+  
+  值类型之间传递的是值，引用类型之间传递的是地址。 
   ```
 
 - 注意：JavaScript中没有堆和栈的概念，此处我们用堆和栈来讲解，目的方便理解和方便以后的学习。
@@ -1747,19 +1756,19 @@ console.log(obj.name); // undefined
 
 #### 基本类型在内存中的存储
 
-![1498288494687](media/1498288494687.png)
+![](/Users/leitianxiao/Documents/GitHub/NoteBooks/100 - Work | 工作/110 - Work -Src | 源 /basics-neicun.png)
 
 #### 复杂类型在内存中的存储
 
-![1498700592589](media/1498700592589.png)
+![](/Users/leitianxiao/Documents/GitHub/NoteBooks/100 - Work | 工作/110 - Work -Src | 源 /comp-neicun.png)
 
 #### 基本类型作为函数的参数
 
-![1497497605587](media/1497497605587-8288640195.png)
+![](/Users/leitianxiao/Documents/GitHub/NoteBooks/100 - Work | 工作/110 - Work -Src | 源 /basics-hanshu.png)
 
 #### 复杂类型作为函数的参数
 
-![1497497865969](media/1497497865969.png)
+![](/Users/leitianxiao/Documents/GitHub/NoteBooks/100 - Work | 工作/110 - Work -Src | 源 /comp-hanshu.png)
 
 ```javascript
 // 下面代码输出的结果
@@ -1817,7 +1826,29 @@ console.log(num);
 ```
 ## 内置对象
 
-JavaScript中的对象分为3种：内置对象、浏览器对象、自定义对象
+JavaScript中的对象分为3种：
+
+- 内置对象：js自带的对象
+- 浏览器对象：BOM
+- 自定义对象：自定义构造函数创建的对象
+
+怎么验证变量是不是对象？
+
+```java
+console.log(变量 instanceof Object);//返回true就是对象,返回false不是对象
+var obj={};
+console.log(obj instanceof Object);//true
+console.log(Array instanceof Object);//true
+obj就是自定义创建的对象，Array就是内置对象
+```
+
+实例对象：通过构造函数创建出来，实例化的对象。
+
+静态对象：不需要创建，直接就是一个对象，静态方法直接通过这个对象名字调用。
+
+实例方法通过实例对象调用
+
+静态方法通过大写的对象调用
 
 JavaScript 提供多个内置对象：Math/Array/Number/String/Boolean...
 
@@ -1861,9 +1892,8 @@ Math.floor()/Math.ceil()	 // 向下取整/向上取整
 Math.round()				// 取整，四舍五入
 Math.abs()					// 绝对值
 Math.max()/Math.min()		 // 求最大和最小值
-
 Math.sin()/Math.cos()		 // 正弦/余弦
-Math.power()/Math.sqrt()	 // 求指数次幂/求平方根
+Math.pow()/Math.sqrt()	 // 求指数次幂/求平方根
 ```
 
 #### 案例
