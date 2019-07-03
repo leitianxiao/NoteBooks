@@ -1570,7 +1570,24 @@ var o = {
 };   
 ```
 
+- 自定义构造函数创建对象
+
+```javascript
+function Person(name,age,job){
+  this.name = name;
+  this.age = age;
+  this.job = job;
+  this.sayHi = function(){
+  	console.log('Hello,everyBody');
+  }
+  //注意这里没有return
+}
+//注意这里有个new
+var p1 = new Person('张三', 22, 'actor');
+```
+
 - 工厂函数创建对象
+
 ```javascript
 //把创建对象的过程，放在函数中，返回这个对象
 function createPerson(name, age, job) {
@@ -1586,22 +1603,6 @@ function createPerson(name, age, job) {
 //调用方法创建对象
 var p1 = createPerson('张三', 22, 'actor');
 var p2 = createPerson('王五', 23, 'actor');
-```
-
-- 自定义构造函数创建对象
-
-```javascript
-function Person(name,age,job){
-  this.name = name;
-  this.age = age;
-  this.job = job;
-  this.sayHi = function(){
-  	console.log('Hello,everyBody');
-  }
-  //注意这里没有return
-}
-//注意这里有个new
-var p1 = new Person('张三', 22, 'actor');
 ```
 
 - 创建对象时内存空间示意图：
@@ -1681,7 +1682,7 @@ new会返回这个新对象
 > JSON也是一个对象，数据都是成对的，一般JSON格式的数据无论是键还是值都要用引号引起来
 
 ```javascript
-//对象是无序的，没有索引，不能通过for循环遍历
+//对象的属性和方法是无序的，没有索引，不能通过for循环遍历
 var json={
   "name":"乔峰",
   "age":"23",
@@ -1899,7 +1900,39 @@ Math.pow()/Math.sqrt()	 // 求指数次幂/求平方根
 #### 案例
 
 - 求10-20之间的随机数
+
+```javascript
+/*  随机10-20 */
+function suiJi() {
+  return (Math.random()*10+10);
+}
+console.log(suiJi());
+```
+
 - 随机生成颜色RGB
+
+```javascript
+//随机RGB颜色
+function rgb() {
+   var red=Math.floor((Math.random()*255));
+   var green=Math.floor((Math.random()*255));
+   var blue=Math.floor((Math.random()*255));
+   return (red+","+green+","+blue);
+ }
+console.log(rgb());
+
+//随机十六进制颜色
+function yanSe() {
+  var str="#";
+  var arr=["0","1","2","3","4","5","6","7","8","9","A","B","C","D","E","F"];
+  for (var i=0;i<6;i++) {
+    str=str+arr[(parseInt(Math.random()*16))];
+  }
+  return str;
+}
+console.log(yanSe());
+```
+
 - 模拟实现max()/min()
 
 ### Date对象
@@ -1908,10 +1941,11 @@ Math.pow()/Math.sqrt()	 // 求指数次幂/求平方根
 
 ~~~javascript
 // 获取当前时间，UTC世界时间，距1970年1月1日（世界标准时间）起的毫秒数
-var now = new Date();
+//创建实例对象
+var now = new Date();//不传时间，就是当前服务器的时间
 console.log(now.valueOf());	// 获取距1970年1月1日（世界标准时间）起的毫秒数
 
-Date构造函数的参数
+Date构造函数的参数//传时间就是对应的时间
 1. 毫秒数 1498099000356		new Date(1498099000356)
 2. 日期格式字符串  '2015-5-1'	 new Date('2015-5-1')
 3. 年、月、日……				  new Date(2015, 4, 1)   // 月份从0开始
@@ -1925,7 +1959,7 @@ var now = new Date();
 console.log(date.valueOf())	
 
 // HTML5中提供的方法，有兼容性问题
-var now = Date.now();	
+var now = Date.now();	 //毫秒数
 
 // 不支持HTML5的浏览器，可以用下面这种方式
 var now = + new Date();			// 调用 Date对象的valueOf() 
@@ -1937,10 +1971,10 @@ var now = + new Date();			// 调用 Date对象的valueOf()
 toString()		// 转换成字符串
 valueOf()		// 获取毫秒值
 // 下面格式化日期的方法，在不同浏览器可能表现不一致，一般不用
-toDateString()
-toTimeString()
-toLocaleDateString()
-toLocaleTimeString()
+toDateString()//英文的日期 --> Wed Jul 03 2019
+toTimeString()//16:23:24 GMT+0800 (中国标准时间)
+toLocaleDateString()//数字格式 --> 2019/7/3
+toLocaleTimeString()//下午4:23:24
 ```
 
 - 获取日期指定部分
@@ -1953,7 +1987,7 @@ getMinutes()  // 返回0-59
 getHours()    // 返回0-23
 getDay()      // 返回星期几 0周日   6周6
 getDate()     // 返回当前月的第几天
-getMonth()    // 返回月份，***从0开始***
+getMonth()    // 返回月份，***从0开始***真实月份需要加1
 getFullYear() //返回4位的年份  如 2016
 ```
 
@@ -1962,24 +1996,31 @@ getFullYear() //返回4位的年份  如 2016
 - 写一个函数，格式化日期对象，返回yyyy-MM-dd HH:mm:ss的形式
 
 ```javascript
-function formatDate(d) {
-  //如果date不是日期对象，返回
-  if (!date instanceof Date) {
-    return;
+//需求：将时间转换为yyyy-MM-dd HH:mm:ss
+function transTime(dt) {
+  //如果不是时间格式
+    if(!dt instanceof Date){
+      	document.write(dt+" 不是时间格式,请重试");
+      	return;
+    }
+    //提取年月日时分秒
+    var year=dt.getFullYear();
+    var month=dt.getMonth()+1;
+    var day=dt.getDate();
+    var hour=dt.getHours();
+    var minute=dt.getMinutes();
+    var second=dt.getSeconds();
+    //三元表达式，月日时分秒为10以下时，前面加0
+    month=month<10?("0"+month):month;
+    day=day<10?("0"+day):day;
+    hour=hour<10?("0"+hour):hour;
+    minute=minute<10?("0"+minute):minute;
+    second=second<10?("0"+second):second;
+    //返回时间格式为yyyy-MM-dd HH:mm:ss
+    return year+"-"+month+"-"+day+" "+hour+":"+minute+":"+second;
   }
-  var year = d.getFullYear(),
-      month = d.getMonth() + 1, 
-      date = d.getDate(), 
-      hour = d.getHours(), 
-      minute = d.getMinutes(), 
-      second = d.getSeconds();
-  month = month < 10 ? '0' + month : month;
-  date = date < 10 ? '0' + date : date;
-  hour = hour < 10 ? '0' + hour : hour;
-  minute = minute < 10 ? '0' + minute:minute;
-  second = second < 10 ? '0' + second:second;
-  return year + '-' + month + '-' + date + ' ' + hour + ':' + minute + ':' + second;
-}
+    var dt=new Date();
+    console.log(transTime(dt));
 ```
 
 - 计算时间差，返回相差的天/时/分/秒
@@ -2000,6 +2041,138 @@ function getInterval(start, end) {
     second: second
   }
 }
+```
+
+### String对象
+
+>string(首字母小写) — 字符串类型 — 基本类型
+>
+>String(首字母大写) — 字符串类型 — 引用类型
+
+- 字符串的不可变
+
+```javascript
+var str = 'abc';
+str = 'hello';
+// 当重新给str赋值的时候，常量'abc'不会被修改，依然在内存中
+// 重新给字符串赋值，会重新在内存中开辟空间，这个特点就是字符串的不可变
+// 由于字符串的不可变，在大量拼接字符串的时候会有效率问题
+```
+
+- 创建字符串对象
+
+```javascript
+var str = new String('Hello World');
+
+// 获取字符串中字符的个数
+console.log(str.length);
+```
+
+- 字符串对象的常用方法
+
+  字符串所有的方法，都不会修改字符串本身(字符串是不可变的)，操作完成会返回一个新的字符串
+
+```javascript
+// 1 字符方法
+charAt()    	//获取指定位置处字符
+charCodeAt()  	//获取指定位置处字符的ASCII码
+str[0]   		//HTML5，IE8+支持 和charAt()等效
+// 2 字符串操作方法
+concat()   		//拼接字符串，等效于+，+更常用
+slice()    		//从start位置开始，截取到end位置，end取不到
+substring() 	//从start位置开始，截取到end位置，end取不到
+substr()   		//从start位置开始，截取length个字符
+// 3 位置方法
+indexOf()   	//返回指定内容在元字符串中的位置
+lastIndexOf() 	//从后往前找，只找第一个匹配的
+// 4 去除空白   
+trim()  		//只能去除字符串前后的空白
+// 5 大小写转换方法
+to(Locale)UpperCase() 	//转换大写
+to(Locale)LowerCase() 	//转换小写
+// 6 其它
+search()
+replace()
+split()
+fromCharCode()
+// String.fromCharCode(101, 102, 103);	 //把ASCII码转换成字符串
+```
+
+#### 案例
+
+- 截取字符串"我爱中华人民共和国"，中的"中华"
+
+```javascript
+var s = "我爱中华人民共和国";
+s = s.substr(2,2);
+console.log(s);
+```
+
+- "abcoefoxyozzopp"查找字符串中所有o出现的位置
+
+```javascript
+var s = 'abcoefoxyozzopp';
+var array = [];
+do {
+  var index = s.indexOf('o', index + 1);
+  if (index != -1) {
+    array.push(index);
+  }
+} while (index > -1);
+console.log(array);
+```
+
+- 把字符串中所有的o替换成!
+
+```javascript
+var s = 'abcoefoxyozzopp';
+do {
+  s = s.replace('o', '');
+} while (s.indexOf('o') > -1);
+console.log(s);
+
+console.log(s.replace(/o/ig, ''));
+```
+
+- 判断一个字符串中出现次数最多的字符，统计这个次数
+
+```javascript
+var s = 'abcoefoxyozzopp';
+var o = {};
+
+for (var i = 0; i < s.length; i++) {
+  var item = s.charAt(i);
+  if (o[item]) {
+    o[item] ++;
+  }else{
+    o[item] = 1;
+  }
+}
+
+var max = 0;
+var char ;
+for(var key in o) {
+  if (max < o[key]) {
+    max = o[key];
+    char = key;
+  }
+}
+
+console.log(max);
+console.log(char);
+```
+
+作业
+
+```
+给定一个字符串如：“abaasdffggghhjjkkgfddsssss3444343”问题如下： 
+1、 字符串的长度 
+2、 取出指定位置的字符，如：0,3,5,9等 
+3、 查找指定字符是否在以上字符串中存在，如：i，c ，b等 
+4、 替换指定的字符，如：g替换为22,ss替换为b等操作方法 
+5、 截取指定开始位置到结束位置的字符串，如：取得1-5的字符串
+6、 找出以上字符串中出现次数最多的字符和出现的次数 
+7、 遍历字符串，并将遍历出的字符两头添加符号“@”输出至当前的文档页面。
 ```
 
 ### Array对象
@@ -2211,134 +2384,4 @@ var num = new Number(18); 	//基本包装类型，对象
 // Number和Boolean基本包装类型基本不用，使用的话可能会引起歧义。例如：
 var b1 = new Boolean(false);
 var b2 = b1 && true;		// 结果是什么
-```
-
-### String对象
-
-- 字符串的不可变
-
-```javascript
-var str = 'abc';
-str = 'hello';
-// 当重新给str赋值的时候，常量'abc'不会被修改，依然在内存中
-// 重新给字符串赋值，会重新在内存中开辟空间，这个特点就是字符串的不可变
-// 由于字符串的不可变，在大量拼接字符串的时候会有效率问题
-```
-
-- 创建字符串对象
-
-```javascript
-var str = new String('Hello World');
-
-// 获取字符串中字符的个数
-console.log(str.length);
-```
-
-- 字符串对象的常用方法
-
-  字符串所有的方法，都不会修改字符串本身(字符串是不可变的)，操作完成会返回一个新的字符串
-
-```javascript
-// 1 字符方法
-charAt()    	//获取指定位置处字符
-charCodeAt()  	//获取指定位置处字符的ASCII码
-str[0]   		//HTML5，IE8+支持 和charAt()等效
-// 2 字符串操作方法
-concat()   		//拼接字符串，等效于+，+更常用
-slice()    		//从start位置开始，截取到end位置，end取不到
-substring() 	//从start位置开始，截取到end位置，end取不到
-substr()   		//从start位置开始，截取length个字符
-// 3 位置方法
-indexOf()   	//返回指定内容在元字符串中的位置
-lastIndexOf() 	//从后往前找，只找第一个匹配的
-// 4 去除空白   
-trim()  		//只能去除字符串前后的空白
-// 5 大小写转换方法
-to(Locale)UpperCase() 	//转换大写
-to(Locale)LowerCase() 	//转换小写
-// 6 其它
-search()
-replace()
-split()
-fromCharCode()
-// String.fromCharCode(101, 102, 103);	 //把ASCII码转换成字符串
-```
-
-#### 案例
-
-- 截取字符串"我爱中华人民共和国"，中的"中华"
-
-```javascript
-var s = "我爱中华人民共和国";
-s = s.substr(2,2);
-console.log(s);
-```
-
-- "abcoefoxyozzopp"查找字符串中所有o出现的位置
-
-```javascript
-var s = 'abcoefoxyozzopp';
-var array = [];
-do {
-  var index = s.indexOf('o', index + 1);
-  if (index != -1) {
-    array.push(index);
-  }
-} while (index > -1);
-console.log(array);
-```
-
-- 把字符串中所有的o替换成!
-
-```javascript
-var s = 'abcoefoxyozzopp';
-do {
-  s = s.replace('o', '');
-} while (s.indexOf('o') > -1);
-console.log(s);
-
-console.log(s.replace(/o/ig, ''));
-```
-
-- 判断一个字符串中出现次数最多的字符，统计这个次数
-
-```javascript
-var s = 'abcoefoxyozzopp';
-var o = {};
-
-for (var i = 0; i < s.length; i++) {
-  var item = s.charAt(i);
-  if (o[item]) {
-    o[item] ++;
-  }else{
-    o[item] = 1;
-  }
-}
-
-var max = 0;
-var char ;
-for(var key in o) {
-  if (max < o[key]) {
-    max = o[key];
-    char = key;
-  }
-}
-
-console.log(max);
-console.log(char);
-```
-
-
-
-#### 作业
-
-```
-给定一个字符串如：“abaasdffggghhjjkkgfddsssss3444343”问题如下： 
-1、 字符串的长度 
-2、 取出指定位置的字符，如：0,3,5,9等 
-3、 查找指定字符是否在以上字符串中存在，如：i，c ，b等 
-4、 替换指定的字符，如：g替换为22,ss替换为b等操作方法 
-5、 截取指定开始位置到结束位置的字符串，如：取得1-5的字符串
-6、 找出以上字符串中出现次数最多的字符和出现的次数 
-7、 遍历字符串，并将遍历出的字符两头添加符号“@”输出至当前的文档页面。 
 ```
