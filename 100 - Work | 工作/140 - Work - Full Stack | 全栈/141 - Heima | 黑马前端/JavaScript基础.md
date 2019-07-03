@@ -1847,9 +1847,9 @@ obj就是自定义创建的对象，Array就是内置对象
 
 静态对象：不需要创建，直接就是一个对象，静态方法直接通过这个对象名字调用。
 
-实例方法通过实例对象调用
+实例方法通过实例对象调用，必须要通过new的方式创建的对象（实例对象）来调用的方法。
 
-静态方法通过大写的对象调用
+静态方法通过大写的对象调用，直接通过大写的构造函数的名字调用的方法（直接通过大写的对象名字调用的）
 
 JavaScript 提供多个内置对象：Math/Array/Number/String/Boolean...
 
@@ -2059,13 +2059,26 @@ str = 'hello';
 // 由于字符串的不可变，在大量拼接字符串的时候会有效率问题
 ```
 
+- 遍历字符串中的字符
+
+```javascript
+//字符串可以看成是字符组成的数组，但js中是没有字符概念的。
+//遍历字符串中的字符
+var str="abcdef";
+for (var i=0;i<str.length;i++){
+      console.log(str[i]);
+} 
+str[1]="W";//无效,字符串可以通过索引访问字符串中的某个值，但只是可以访问，不可以修改（即字符串不可变）
+str="hello";//开辟了新的空间了。str有了新的地址，指向改变了。
+console.log(str);//hello
+```
+
 - 创建字符串对象
 
 ```javascript
 var str = new String('Hello World');
-
 // 获取字符串中字符的个数
-console.log(str.length);
+console.log(str.length);//String的属性 length
 ```
 
 - 字符串对象的常用方法
@@ -2074,28 +2087,28 @@ console.log(str.length);
 
 ```javascript
 // 1 字符方法
-charAt()    	//获取指定位置处字符
+charAt(index)    	//获取指定索引位置处字符,不填默认是0,索引越界返回空字符
 charCodeAt()  	//获取指定位置处字符的ASCII码
 str[0]   		//HTML5，IE8+支持 和charAt()等效
 // 2 字符串操作方法
 concat()   		//拼接字符串，等效于+，+更常用
-slice()    		//从start位置开始，截取到end位置，end取不到
+slice(start index,end index)  //从start位置开始，截取到end位置，end取不到
 substring() 	//从start位置开始，截取到end位置，end取不到
-substr()   		//从start位置开始，截取length个字符
+substr(start index,lenght)   		//从start位置开始，截取length个字符
 // 3 位置方法
-indexOf()   	//返回指定内容在元字符串中的位置
+indexOf()   	//返回指定内容在元字符串中的位置,找不到返回-1
 lastIndexOf() 	//从后往前找，只找第一个匹配的
 // 4 去除空白   
-trim()  		//只能去除字符串前后的空白
+trim()  		//只能去除字符串前后的空白,中间的不去掉
 // 5 大小写转换方法
 to(Locale)UpperCase() 	//转换大写
 to(Locale)LowerCase() 	//转换小写
 // 6 其它
 search()
-replace()
-split()
+replace(原字符串，新字符串)//替换，原字符串不会改变
+split("分割符(符号或字符)"，切割留下的个数)//按照指定分割符，分割，返回一个数组 
 fromCharCode()
-// String.fromCharCode(101, 102, 103);	 //把ASCII码转换成字符串
+// String.fromCharCode(65, 66, 67);	 //ABC, 把ASCII码转换成字符串
 ```
 
 #### 案例
