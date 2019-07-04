@@ -2124,15 +2124,13 @@ console.log(s);
 - "abcoefoxyozzopp"查找字符串中所有o出现的位置
 
 ```javascript
-var s = 'abcoefoxyozzopp';
-var array = [];
-do {
-  var index = s.indexOf('o', index + 1);
-  if (index != -1) {
-    array.push(index);
-  }
-} while (index > -1);
-console.log(array);
+var str="abcoefoxyozzopp";
+var index=0;
+while (str.indexOf("o",index)!=-1){
+  index=str.indexOf("o",index);
+  console.log(index);
+  index=index+1;
+}
 ```
 
 - 把字符串中所有的o替换成!
@@ -2150,29 +2148,30 @@ console.log(s.replace(/o/ig, ''));
 - 判断一个字符串中出现次数最多的字符，统计这个次数
 
 ```javascript
-var s = 'abcoefoxyozzopp';
-var o = {};
 
-for (var i = 0; i < s.length; i++) {
-  var item = s.charAt(i);
-  if (o[item]) {
-    o[item] ++;
-  }else{
-    o[item] = 1;
+/*
+字符串中每个字符的出现次数
+ */
+var str="aAabfBffCoApjskAqqwsedfCFSA";
+//统计字符出现次数，不区分大小写，所以先转化为全大写或全小写
+str=str.toLocaleLowerCase();//转为小写
+//创建一个对象，把字母作为键，次数作为值
+var obj={};
+//遍历字符串中的字符
+for (var i=0;i<str.length;i++){
+  //把遍历的每个字符都放进key里；
+  var key=str[i];
+  if (obj[key]){//如果有这个key
+    obj[key]++;
+  }else {//如果没有这个key
+    obj[key]=1;
   }
 }
-
-var max = 0;
-var char ;
-for(var key in o) {
-  if (max < o[key]) {
-    max = o[key];
-    char = key;
-  }
+//遍历对象
+for(key in obj){
+  console.log(key+"出现了"+obj[key]+"次");
 }
 
-console.log(max);
-console.log(char);
 ```
 
 作业
@@ -2229,7 +2228,7 @@ console.log(arr.length);
 
 ```javascript
 // 1 栈操作(先进后出)
-push()
+push() //把值追加到数组最后
 pop() 		//取出数组中的最后一项，修改length属性
 // 2 队列操作(先进先出)
 push()
