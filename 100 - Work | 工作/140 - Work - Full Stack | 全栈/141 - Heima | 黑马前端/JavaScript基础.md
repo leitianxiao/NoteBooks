@@ -2240,14 +2240,14 @@ sort(); 	//即使是数组sort也是根据字符，从小到大排序
 // 带参数的sort是如何实现的？
 // 4 操作方法
 concat()  	//把参数拼接到当前数组
-slice() 	//从当前数组中截取一个新的数组，不影响原来的数组，参数start从0开始,end从1开始
+slice(start index,end index) 	//从当前数组中截取一个新的数组，不影响原来的数组，参数start从0开始,end从1开始
 splice()	//删除或替换当前数组的某些项目，参数start, deleteCount, options(要替换的项目)
 // 5 位置方法
 indexOf()、lastIndexOf()   //如果没找到返回-1
 // 6 迭代方法 不会修改原数组(可选)
 every()、filter()、forEach()、map()、some()
 // 7 方法将数组的所有元素连接到一个字符串中。
-join()
+join()//分割
 ```
 
 - 清空数组
@@ -2374,6 +2374,10 @@ console.log(clear(array));
 
 ### 基本包装类型
 
+普通变量不能直接调用属性和方法。对象可以直接调用属性和方法。
+
+基本包装类型：本身是基本类型，在执行代码的过程，如果这种类型的变量调用了属性或者方法，那么这种类型就不再是基本类型，而是基本包装类型。这个变量也不再是普通的变量，而是基本包装类型对象。
+
 为了方便操作基本数据类型，JavaScript还提供了三个特殊的引用类型：String/Number/Boolean
 
 ```javascript
@@ -2391,9 +2395,10 @@ s1 = null;
 ```javascript
 // 创建基本包装类型的对象
 var num = 18;  				//数值，基本类型
-var num = Number('18'); 	//类型转换
+var num = Number('18'); 	//类型转换，不是new
 var num = new Number(18); 	//基本包装类型，对象
 // Number和Boolean基本包装类型基本不用，使用的话可能会引起歧义。例如：
 var b1 = new Boolean(false);
-var b2 = b1 && true;		// 结果是什么
+var b2 = b1 && true;		// 结果是什么，
+//如果 对象&&true 结果是true ；如果是 true&&对象 结果是对象
 ```
