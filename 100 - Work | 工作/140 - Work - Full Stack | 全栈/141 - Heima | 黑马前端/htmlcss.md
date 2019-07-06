@@ -924,7 +924,7 @@ img、input、td
 #### 行高
 
 ##### 概念
-![](../../100 - Work | 工作/110 - Work -Src | 源 /line-height.png)
+![](../../110 - Work -Src | 源 /line-height.png)
 
 ##### 最常用用法
 

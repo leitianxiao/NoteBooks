@@ -115,7 +115,7 @@ js代码的注意问题
 - 输入设备：鼠标、键盘、手写板、摄像头等
 - 输出设备：显示器、打印机、投影仪等
 
-![](/Users/leitianxiao/Documents/GitHub/NoteBooks/100 - Work | 工作/110 - Work -Src | 源 /compute.png)
+![](../../110 - Work -Src | 源 /compute.png)
 
 ## 变量
 
@@ -1607,7 +1607,7 @@ var p2 = createPerson('王五', 23, 'actor');
 
 - 创建对象时内存空间示意图：
 
-![](/Users/leitianxiao/Documents/GitHub/NoteBooks/100 - Work | 工作/110 - Work -Src | 源 /new.png)
+![](../../110 - Work -Src | 源 /new.png)
 
 - 如何获取变量（对象）是不是属于什么类型？
 
@@ -1757,19 +1757,19 @@ console.log(obj.name); // undefined
 
 #### 基本类型在内存中的存储
 
-![](/Users/leitianxiao/Documents/GitHub/NoteBooks/100 - Work | 工作/110 - Work -Src | 源 /basics-neicun.png)
+![](../../110 - Work -Src | 源 /basics-neicun.png)
 
 #### 复杂类型在内存中的存储
 
-![](/Users/leitianxiao/Documents/GitHub/NoteBooks/100 - Work | 工作/110 - Work -Src | 源 /comp-neicun.png)
+![](../../110 - Work -Src | 源 /comp-neicun.png)
 
 #### 基本类型作为函数的参数
 
-![](/Users/leitianxiao/Documents/GitHub/NoteBooks/100 - Work | 工作/110 - Work -Src | 源 /basics-hanshu.png)
+![](../../110 - Work -Src | 源 /basics-hanshu.png)
 
 #### 复杂类型作为函数的参数
 
-![](/Users/leitianxiao/Documents/GitHub/NoteBooks/100 - Work | 工作/110 - Work -Src | 源 /comp-hanshu.png)
+![](../../110 - Work -Src | 源 /comp-hanshu.png)
 
 ```javascript
 // 下面代码输出的结果
