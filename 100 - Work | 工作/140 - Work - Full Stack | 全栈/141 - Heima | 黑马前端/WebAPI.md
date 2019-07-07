@@ -464,8 +464,100 @@ getChildren(doc);
 
 11.点击按钮切换图片
 12.点击超链接停止跳转页面
+
+```html
+<body>
+    <a href="http://www.baidu.com" id="res" >百度</a>
+    <script src="common.js"></script>
+    <script>
+        //超链接有默认跳转功能，执行alert之后，执行跳转
+        //阻止超链接的默认跳转用 return false;
+        my$("res").onclick=function () {
+            alert("hello");
+            return false;//阻止默认跳转
+        }
+    </script>
+</body>
+```
+
 13.点击小图显示大图
+
+```html
+<body>
+    <a href="1-big.jpg" id="res" ><img src="1-small.png" alt="" id="im"></a>
+    <script src="common.js"></script>
+    <script>
+        //超链接有默认跳转功能，执行alert之后，执行跳转
+        //阻止超链接的默认跳转用 return false;
+        my$("res").onclick=function () {
+           my$("im").src=this.href;
+           return false;
+        }
+    </script>
+</body>
+```
+
 14.美女相册
+
+```html
+<head>
+		<style>
+        li{
+            list-style: none;
+            float: left;
+            margin: 5px 5px;
+        }
+        ul {
+            display: block;
+            height: 150px;
+        }
+        #im1 {
+            margin-left: 50px;
+        }
+    </style>
+</head>
+<body>
+    <h1>美女画廊</h1>
+    <!--小图结构-->
+    <ul>
+        <li>
+            <a href="1-big.jpg" >
+                <img src="1-small.png" alt="" width="100" height="100" >
+            </a>
+        </li>
+        <li>
+            <a href="01.jpg">
+                <img src="1-small.png" alt="" width="100" height="100">
+            </a>
+        </li>
+        <li>
+            <a href="1-big.jpg" >
+                <img src="1-small.png" alt="" width="100" height="100" >
+            </a>
+        </li>
+        <li>
+            <a href="01.jpg">
+                <img src="1-small.png" alt="" width="100" height="100">
+            </a>
+        </li>
+    </ul>
+    <!--大图显示处-->
+    <img src="" alt="" id="im1" display="block" >
+
+    <script>
+        var akObj=document.getElementsByTagName("a");
+        //循环给每个a标签设定onclick事件
+        for (var i=0;i<akObj.length;i++){
+            akObj[i].onclick=function () {
+                    my$("im1").src=this.href;
+                    return false;
+            }
+        }
+    </script>
+    <script src="common.js"></script>
+</body>
+```
+
 15点击按钮选中性别和兴趣
 
 ```html
@@ -797,12 +889,87 @@ box.className = 'clearfix';
 
 ### 案例
 
-- 开关灯
 - 点击按钮变色
 - 图片切换二维码案例
 - 当前输入的文本框高亮显示
 - 点击按钮改变div的大小和位置
 - 列表隔行变色、高亮显示
+
+```html
+<head>
+	<style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        li {
+            list-style: none;
+            height: 50px;
+            border: 5px coral;
+        }
+        .cls :nth-child(even) {
+            background-color: pink;
+        }
+        .cls :nth-child(odd) {
+            background-color: blue;
+        }
+
+
+    </style>
+</head>
+<body>
+<!--    点击按钮列表隔行变色-->
+    <input type="button" value="隔行变色"  id="btn">
+    <ul id="uu">
+        <li>hello</li>
+        <li>yexu</li>
+        <li>shazi</li>
+        <li>xixi</li>
+        <li>haha</li>
+        <li>heooll</li>
+    </ul>
+    <script src="common.js"></script>
+    <script>
+        var btnObj=my$("btn");
+        btnObj.onclick=function () {
+            my$("uu").className="cls";
+        }
+    </script>
+</body>
+```
+
+- 鼠标经过高亮
+
+```html
+<body>
+    <!--鼠标经过高亮-->
+    <ul id="uu">
+        <li>hello</li>
+        <li>sally</li>
+        <li>shazi</li>
+        <li>xixi</li>
+        <li>haha</li>
+        <li>heooll</li>
+    </ul>
+    <script src="common.js"></script>
+    <script>
+        var list=document.getElementsByTagName("li");
+        for (var i=0;i<list.length;i++){
+            //鼠标经过事件 onmouseover
+            list[i].onmouseover=function () {
+                this.style.backgroundColor="yellow";
+            }
+            //鼠标移除事件 onmouseout
+            list[i].onmouseout=function () {
+                this.style.backgroundColor="";
+            }
+        }
+    </script>
+</body>
+```
+
+
+
 - 京东商品展示
 - tab选项卡切换
 
