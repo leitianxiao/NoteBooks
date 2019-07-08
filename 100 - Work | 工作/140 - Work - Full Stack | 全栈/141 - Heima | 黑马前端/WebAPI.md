@@ -265,7 +265,8 @@ getChildren(doc);
 - 对元素进行操作(设置其属性或调用其方法)
 - 事件(什么时机做相应的操作)
 
-##案例
+### 案例
+
 1.点击按钮弹出对话框
 2.点击按钮修改超链接的地址和热点文字
 
@@ -692,16 +693,13 @@ getChildren(doc);
 </body>
 ```
 
-
-
-## 获取页面元素
-
+##  获取页面元素
 
 ### 为什么要获取页面元素
 
 例如：我们想要操作页面上的某部分(显示/隐藏，动画)，需要先获取到该部分对应的元素，才进行后续操作
 
-### 根据id获取元素
+#### 根据id获取元素
 
 ```javascript
 var div = document.getElementById('main');
@@ -713,7 +711,7 @@ console.log(div);
 
 注意：由于id名具有唯一性，部分浏览器支持直接使用id名访问元素，但不是标准方式，不推荐使用。
 
-### 根据标签名获取元素
+#### 根据标签名获取元素
 
 ```javascript
 var divs = document.getElementsByTagName('div');//返回一个伪数组，无论返回几个标签，返回都是用数组存储的
@@ -723,7 +721,7 @@ for (var i = 0; i < divs.length; i++) {
 }
 ```
 
-### 根据name获取元素*
+#### 根据name获取元素*
 
 ```javascript
 var inputs = document.getElementsByName('hobby');
@@ -733,7 +731,7 @@ for (var i = 0; i < inputs.length; i++) {
 }
 ```
 
-### 根据类名获取元素
+#### 根据类名获取元素
 
 ```javascript
 var mains = document.getElementsByClassName('main');
@@ -743,14 +741,14 @@ for (var i = 0; i < mains.length; i++) {
 }
 ```
 
-### 根据选择器获取元素
+#### 根据选择器获取元素
 
 ```javascript
-var text = document.querySelector('#text');
+var text = document.querySelector('#text');//跟css选择器一样，#id名，返回的是一个元素对象
 console.log(text);
 
-var boxes = document.querySelectorAll('.box');
-for (var i = 0; i < boxes.length; i++) {
+var boxes = document.querySelectorAll('.box');//.类名，返回一个伪数组，里面保存多个dom对象
+for (var i = 0; i < boxes.length; i++) { //循环访问数组
   var box = boxes[i];
   console.log(box);
 }
