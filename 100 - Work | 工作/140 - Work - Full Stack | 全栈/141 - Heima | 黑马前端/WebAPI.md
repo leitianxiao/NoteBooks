@@ -813,6 +813,8 @@ console.log(pic.src);
 
 ​	点击按钮显示隐藏div
 
+
+
 - innerHTML和innerText
 
 ```javascript
@@ -836,7 +838,66 @@ console.log(box.innerText);
 
 - innerHTML和innerText的区别
 
+
+
 - innerText的兼容性处理
+
+```html
+<head>   
+	<style>
+        div {
+            height: 200px;
+            width: 200px;
+            border: 1px solid red;
+        }
+    </style>
+</head>
+<body>
+    <input type="button" value="设置值" id="btn">
+    <div>new start</div>
+<script>
+
+    var obj=document.getElementById("btn");
+    obj.onclick=function () {
+        //设置标签中的文本内容，应该使用textContent,谷歌、火狐支持，但IE8不支持
+        document.getElementsByTagName("div")[0].textContent="hello world";
+        //innerText是IE8的特有属性,谷歌、高版本的火狐支持，低版本的火狐浏览器不支持，不能同时写两行，报错的话不会执行下面的代码
+        // document.getElementsByTagName("div")[0].innerText="hello world";
+
+    }
+    //获取文本内容
+    //textContent,IE8不支持，结果显示undefined
+    console.log(document.getElementsByTagName("div")[0].textContent);
+    //console.log(document.getElementsByTagName("div")[0].innerText);
+
+    /*
+    兼容代码：
+        思路：浏览器不支持的属性，类型为undefined,所以，可以根据属性的类型判断浏览器支不支持该属性。
+        //1.设置任意标签中的任意文本内容
+        function setInnerText(element,text){
+            if(typeof element.innerText=="undefined"){ //不支持innerText
+                element.textContent=text;
+            }else { //支持innerText
+                element.innerText=text;
+            }
+        }
+        //2.获取任意标签中的文本内容
+        function getInnerText(element){
+            if(typeof element.innerText=="undefined"){
+                return element.textContent;
+            }else {
+                return element.innerText;
+            }
+         //3.测试
+                调用函数进行测试
+
+        }
+     */
+</script>
+</body>
+```
+
+
 
 
 ### 表单元素属性
@@ -852,7 +913,70 @@ console.log(box.innerText);
 - 给文本框赋值，获取文本框的值
 - 点击按钮禁用文本框
 - 搜索文本框
+
+```html
+<head>    
+	<style>
+        #tt {
+            color: gray;
+        }
+    </style>
+</head>
+
+<body>
+<input type="text" value="请输入内容" id="tt">
+<script>
+    var inObj=document.getElementById("tt");
+  //获得焦点
+    inObj.onfocus=function () {
+        if (this.value=="请输入内容") {
+            this.value="";
+            this.style.color="black";
+        }
+    }
+  //失去焦点
+    inObj.onblur=function () {
+        if (this.value=="") {
+            this.value="请输入内容";
+            this.style.color="gray";
+        }
+    }
+</script>
+
+</body>
+```
+
+
+
 - 检测用户名是否是3-6位，密码是否是6-8位，如果不满足要求高亮显示文本框
+
+```html
+<body>
+    用户名：<input type="text" value="" id="username"><br>
+    密码：<input type="password" id="pwd"><br>
+    <script>
+        var userObj=document.getElementById("username");
+        //失去焦点时校验
+        userObj.onblur=function () {
+            if (this.value.length >= 3 && this.value.length<=6) {
+                this.style.backgroundColor="yellow";
+            }else {
+                this.style.backgroundColor="red";
+            }
+        }
+        var pwdObj=document.getElementById("pwd");
+        //失去焦点时校验
+        pwdObj.onblur=function () {
+            if (this.value.length >= 6 && this.value.length<=8) {
+                this.style.backgroundColor="yellow";
+            }else {
+                this.style.backgroundColor="red";
+            }
+        }
+    </script>
+</body>
+```
+
 - 设置下拉框中的选中项
 - 全选反选
 
