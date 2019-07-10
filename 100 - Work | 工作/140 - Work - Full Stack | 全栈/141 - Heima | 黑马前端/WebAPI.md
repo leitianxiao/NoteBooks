@@ -1039,47 +1039,93 @@ box.className = 'clearfix';
 - 京东商品展示
 - tab选项卡切换
 
+```html
+<head>
+	<style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        .hd span {
+            display: block;
+            float: left;
+            padding: 5px 10px;
+            background-color: blue;
+            color: white;
+            cursor: pointer;
+        }
+        /*点击后的样式*/
+        .hd .current {
+            background-color: pink;
+
+        }
+        ul {
+            list-style: none;
+        }
+        li {
+            display: block;
+            height: 300px;
+            width: 208px;
+            /*border: 1px solid red;*/
+            background-color: blue;
+            padding-top: 10px;
+            position: absolute;
+            top: 32px;
+            left: 0;
+        }
+        /*点击后的样式*/
+        .bd .current {
+            background-color: pink;
+            z-index: 99;
+        }
+    </style>
+</head>
+<body>
+    <div class="box" id="box">
+        <div class="hd">
+            <span>娱乐</span>
+            <span>体育</span>
+            <span>文学</span>
+            <span>纪录</span>
+        </div>
+
+        <div class="bd">
+            <ul>
+                <li>这是娱乐新闻</li>
+                <li>这是体育新闻</li>
+                <li>这是文学新闻</li>
+                <li>这是记录新闻</li>
+            </ul>
+        </div>
+    </div>
+    <script src="common.js"></script>
+    <script>
+        //获取span对象
+        var spanObj=document.getElementsByTagName("span");
+        //获取li对象
+        var liObj=document.getElementsByTagName("li");
+        // 循环，设置span的点击事件
+        for (var i=0;i<spanObj.length;i++) {
+            //给span设置索引，返回给li，span点第几个索引，对应li就是第几个索引
+            spanObj[i].setAttribute("index",i);
+
+            spanObj[i].onclick=function () {
+            //排他性，通过循环先把所有span、li重置
+                for(var j=0;j<spanObj.length;j++){
+                    spanObj[j].className="";
+                    liObj[j].className="";
+                }
+                //给当前span加上className
+                this.className="current";
+                //获取当前点击对象所对应的索引
+                var index=this.getAttribute("index");
+                //发生点击事件的索引给li，设置对应的li的className
+                liObj[index].className="current";
+            }
+        }
+    </script>
+</body>
 ```
-
-```
-
-
-
-
-## 创建元素的三种方式
-
-### document.write()
-
-```javascript
-document.write('新设置的内容<p>标签也可以生成</p>');
-```
-
-### innerHTML
-
-```javascript
-var box = document.getElementById('box');
-box.innerHTML = '新内容<p>新标签</p>';
-```
-
-### document.createElement()
-
-```javascript
-var div = document.createElement('div');
-document.body.appendChild(div);
-```
-
-### 性能问题
-
-- innerHTML方法由于会对字符串进行解析，需要避免在循环内多次使用。
-- 可以借助字符串或数组的方式进行替换，再设置给innerHTML
-- 优化后与document.createElement性能相近
-
-
-### 案例
-
-- 动态创建列表，高亮显示
-- 根据数据动态创建表格
-- 模拟百度搜索文本框
 
 ## 节点操作
 
@@ -1140,9 +1186,41 @@ console.log(box.lastChild);
 	firstChild/lastChild
 ```
 
+## 创建元素的三种方式
+
+### document.write()
+
+```javascript
+document.write('新设置的内容<p>标签也可以生成</p>');
+```
+
+### innerHTML
+
+```javascript
+var box = document.getElementById('box');
+box.innerHTML = '新内容<p>新标签</p>';
+```
+
+### document.createElement()
+
+```javascript
+var div = document.createElement('div');
+document.body.appendChild(div);
+```
+
+### 性能问题
+
+- innerHTML方法由于会对字符串进行解析，需要避免在循环内多次使用。
+- 可以借助字符串或数组的方式进行替换，再设置给innerHTML
+- 优化后与document.createElement性能相近
+
+### 案例
+
+- 动态创建列表，高亮显示
+- 根据数据动态创建表格
+- 模拟百度搜索文本框
+
 ## 事件详解
-
-
 
 ### 注册/移除事件的三种方式
 
