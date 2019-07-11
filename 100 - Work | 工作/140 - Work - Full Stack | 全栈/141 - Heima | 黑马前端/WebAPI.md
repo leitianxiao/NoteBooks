@@ -1127,7 +1127,19 @@ box.className = 'clearfix';
 </body>
 ```
 
-## 节点操作
+## 节点
+
+### 节点属性
+
+- nodeType： 节点的类型，1—标签，2—属性，3—文本
+- nodeName： 节点的名字，标签节点——大写的标签名字，属性节点——小写的属性名字，文本节点——#text
+- nodeValue：节点的值，标签节点——null,属性节点——属性值，文本节点——文本内容
+
+
+
+
+
+## 操作
 
 ```javascript
 var body = document.body;
@@ -1147,7 +1159,9 @@ body.replaceChild(text, div);
 
 ​	权限选择
 
-### 节点层级
+### 节点
+
+### 层级
 
 重点讲父子属性，兄弟属性画图讲解
 
